@@ -29,6 +29,10 @@ export async function getStaticProps() {
     props: {
       meetups: DUMMY_MEETUPS,
     },
+    //* how many seconds to wait before regenerating for any new data
+    //* if the data changes every hour, it would be better to set it to 3600,
+    //* but if it changes every second, it would be better to set it to 1
+    revalidate: 10,
   };
 }
 
