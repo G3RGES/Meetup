@@ -1,6 +1,8 @@
 import { useRouter } from "next/router";
 import MeetupDetail from "../../components/meetups/MeetupDetails";
 import { MongoClient, ObjectId } from "mongodb";
+import { Fragment } from "react";
+import Head from "next/head";
 
 function MeetupDetails(props) {
   return (
@@ -10,12 +12,23 @@ function MeetupDetails(props) {
     //   address="Some street 5, 12345 Some City"
     //   description="the first meetup "
     // />
-    <MeetupDetail
-      image={props.meetupData.image}
-      title={props.meetupData.title}
-      address={props.meetupData.address}
-      description={props.meetupData.description}
-    />
+    <Fragment>
+      <Head>
+        <title>{props.meetupData.title}</title>
+        <meta
+          name="description"
+          // content="Browse a huge list of highly active React meetups"
+          content={props.meetupData.description}
+        />
+      </Head>
+
+      <MeetupDetail
+        image={props.meetupData.image}
+        title={props.meetupData.title}
+        address={props.meetupData.address}
+        description={props.meetupData.description}
+      />
+    </Fragment>
   );
 }
 
