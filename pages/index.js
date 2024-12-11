@@ -1,5 +1,7 @@
+import Head from "next/head";
 import MeetupList from "./../components/meetups/MeetupList";
 import { MongoClient } from "mongodb";
+import { Fragment } from "react";
 
 const DUMMY_MEETUPS = [
   {
@@ -21,7 +23,18 @@ const DUMMY_MEETUPS = [
 ];
 
 function HomePage(props) {
-  return <MeetupList meetups={props.meetups} />;
+  return (
+    <Fragment>
+      <Head>
+        <title>React Meetups</title>
+        <meta
+          name="description"
+          content="Browse a huge list of highly active React meetups"
+        />
+      </Head>
+      <MeetupList meetups={props.meetups} />
+    </Fragment>
+  );
 }
 
 //* this function runs on the server side not on the client side
