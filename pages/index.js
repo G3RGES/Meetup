@@ -1,4 +1,5 @@
 import MeetupList from "./../components/meetups/MeetupList";
+import { MongoClient } from "mongodb";
 
 const DUMMY_MEETUPS = [
   {
@@ -39,9 +40,26 @@ function HomePage(props) {
 
 export async function getStaticProps() {
   //* fetch data from API
+
+  const client = await MongoClient.connect(
+    "mongodb+srv://G3RGES:Gerges95@cluster0.6bgr7.mongodb.net/meetups?retryWrites=true&w=majority&appName=Cluster0"
+  );
+
+  const db = client.db();
+  const meetupsCollection = db.collection("meetups");
+  const meetups = await meetupsCollection.find().toArray();
+  client.close();
+
   return {
     props: {
-      meetups: DUMMY_MEETUPS,
+      // meetups: DUMMY_MEETUPS,
+      meetups: meetups.map((meetup) => ({
+        title: meetup.title,
+        address: meetup.address,
+        image: meetup.image,
+        // description: meetup.description,
+        id: meetup._id.toString(),
+      })),
     },
     //* how many seconds to wait before regenerating for any new data
     //* if the data changes every hour, it would be better to set it to 3600,
