@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import NewMeetupForm from "./../../components/meetups/NewMeetupForm";
-import data from "./../../node_modules/@mongodb-js/saslprep/dist/code-points-data-browser.d";
+
 import { Fragment } from "react";
 import Head from "next/head";
 
