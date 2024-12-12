@@ -50,7 +50,7 @@ export async function getStaticPaths() {
     //* if fallback is false, it means all params provided are the only ones available,
     //* if fallback is true, it means there can be some params available but not provided
     fallback: true,
-    path: meetups.map((meetup) => ({
+    paths: meetups.map((meetup) => ({
       params: {
         meetupId: meetup._id.toString(),
       },
@@ -83,7 +83,7 @@ export async function getStaticProps(context) {
 
   const meetups = await meetupsCollection.find({}, { _id: 1 }).toArray();
   const selectedMeetups = await meetupsCollection.findOne({
-    _id: ObjectId(meetupId),
+    _id: new ObjectId(meetupId),
   });
 
   client.close();
